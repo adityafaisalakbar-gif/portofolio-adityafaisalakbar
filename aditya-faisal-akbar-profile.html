@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Faisal Akbar — IT Infrastructure & Network Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Bebas+Neue&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e0f;
+    --surface: #111618;
+    --surface2: #161d1f;
+    --border: #1e2a2d;
+    --border2: #243033;
+    --accent: #00e5a0;
+    --accent2: #00b8d9;
+    --accent3: #7c3aed;
+    --text: #e2eaec;
+    --text2: #8fa8ad;
+    --text3: #4a6268;
+    --danger: #ff4d6d;
+    --warn: #f59e0b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* SCANLINE */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.03) 2px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,14,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+  }
+
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .status-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  .status-dot::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 5rem;
+    position: relative;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-name span {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text2);
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    border-left: 2px solid var(--accent3);
+    padding-left: 1rem;
+    line-height: 1.8;
+  }
+
+  .hero-summary {
+    font-size: 0.95rem;
+    color: var(--text2);
+    line-height: 1.9;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-summary strong { color: var(--accent); font-weight: 500; }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.75rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    background: #00ffc8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,229,160,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--accent2);
+    border: 1px solid var(--accent2);
+  }
+
+  .btn-outline:hover {
+    background: rgba(0,184,217,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* TERMINAL CARD */
+  .terminal {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    width: 320px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .terminal::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .terminal-header {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-r { background: var(--danger); }
+  .dot-y { background: var(--warn); }
+  .dot-g { background: var(--accent); }
+
+  .terminal-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    margin-left: auto;
+    letter-spacing: 0.06em;
+  }
+
+  .terminal-body {
+    padding: 1.25rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    line-height: 2;
+  }
+
+  .t-line { display: flex; gap: 0.75rem; }
+  .t-prompt { color: var(--accent); }
+  .t-cmd { color: var(--text); }
+  .t-out { color: var(--text2); padding-left: 1.5rem; }
+  .t-key { color: var(--accent2); }
+  .t-val { color: var(--accent); }
+  .t-cursor {
+    display: inline-block;
+    width: 8px; height: 14px;
+    background: var(--accent);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* SECTIONS */
+  section { padding: 6rem 0; position: relative; z-index: 1; }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: 0.04em;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: 0;
+    width: 3rem;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s;
+  }
+
+  .skill-card:hover::before { transform: scaleY(1); }
+
+  .skill-card-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent2);
+    color: var(--accent2);
+    background: rgba(0,184,217,0.08);
+  }
+
+  /* PROJECTS */
+  .projects-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .project-item {
+    background: var(--surface);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: background 0.2s;
+  }
+
+  .project-item:hover { background: var(--surface2); }
+
+  .project-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .project-name {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .project-tech {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text3);
+    margin-top: 0.25rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* CERTS */
+  .certs-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cert-badge {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 1.5rem 2rem;
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .cert-badge:hover { border-color: var(--accent); }
+
+  .cert-badge::after {
+    content: '✓';
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 24px; height: 24px;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .cert-badge::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .cert-badge:hover::before { transform: scaleX(1); }
+
+  .cert-issuer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .cert-name {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  /* CAREER */
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .career-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .career-card:hover {
+    border-color: var(--accent3);
+    background: rgba(124,58,237,0.05);
+  }
+
+  .career-card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .career-card-role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent3);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  .career-card-desc {
+    font-size: 0.8rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  /* STRENGTHS */
+  .strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+
+  .strength-item {
+    background: var(--surface);
+    padding: 2rem;
+    text-align: center;
+    transition: background 0.2s;
+  }
+
+  .strength-item:hover { background: var(--surface2); }
+
+  .strength-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .strength-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* PROFILE SUMMARY BOX */
+  .summary-box {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-box::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem; left: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    color: var(--accent);
+    opacity: 0.08;
+    line-height: 1;
+  }
+
+  .summary-text {
+    font-size: 1rem;
+    line-height: 2;
+    color: var(--text2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .summary-text strong { color: var(--accent); font-weight: 500; }
+  .summary-text em { color: var(--accent2); font-style: normal; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.05em;
+    color: var(--text3);
+  }
+
+  .footer-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag { animation: fadeUp 0.6s ease both; }
+  .hero-name { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-title { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-summary { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-cta { animation: fadeUp 0.6s 0.4s ease both; }
+  .terminal { animation: fadeUp 0.6s 0.5s ease both; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .terminal { display: none; }
+    .projects-list { grid-template-columns: 1fr; }
+    .strengths-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .strengths-grid { grid-template-columns: 1fr; }
+    .career-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <div class="nav-logo">aditya.faisal.akbar</div>
+    <ul class="nav-links">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#keahlian">Keahlian</a></li>
+      <li><a href="#proyek">Proyek</a></li>
+      <li><a href="#sertifikasi">Sertifikasi</a></li>
+      <li><a href="#karier">Karier</a></li>
+    </ul>
+    <div class="status-dot">Available for Opportunities</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="profil">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">IT Infrastructure · Network Engineering · Cloud</div>
+        <h1 class="hero-name">
+          Aditya<br>
+          Faisal<br>
+          <span>Akbar</span>
+        </h1>
+        <div class="hero-title">
+          Network Engineer · System Administrator<br>
+          Cloud Engineer · Infrastructure Specialist
+        </div>
+        <p class="hero-summary">
+          Siswa <strong>SMK Wikrama Bogor</strong> jurusan Teknik Jaringan Komputer dan Telekomunikasi dengan passion mendalam di bidang <strong>infrastruktur jaringan</strong>, administrasi sistem Linux, cloud computing, dan keamanan siber. Telah menyelesaikan lebih dari <strong>20 proyek teknis</strong> yang mencakup ekosistem on-premise hingga cloud AWS — membuktikan kemampuan hands-on yang melampaui level pendidikan formal.
+        </p>
+        <div class="hero-cta">
+          <a href="#proyek" class="btn btn-primary">Lihat Proyek</a>
+          <a href="#karier" class="btn btn-outline">Tujuan Karier</a>
+        </div>
+      </div>
+
+      <!-- TERMINAL -->
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+          <span class="terminal-title">profile.sh</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">whoami</span></div>
+          <div class="t-out"><span class="t-val">aditya_faisal_akbar</span></div>
+          <br>
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">cat profile.json</span></div>
+          <div class="t-out"><span class="t-key">name</span>: <span class="t-val">"Aditya Faisal Akbar"</span></div>
+          <div class="t-out"><span class="t-key">school</span>: <span class="t-val">"SMK Wikrama Bogor"</span></div>
+          <div class="t-out"><span class="t-key">major</span>: <span class="t-val">"TJKT"</span></div>
+          <div class="t-out"><span class="t-key">location</span>: <span class="t-val">"Bogor, ID"</span></div>
+          <div class="t-out"><span class="t-key">projects</span>: <span class="t-val">20+</span></div>
+          <div class="t-out"><span class="t-key">certs</span>: <span class="t-val">3</span></div>
+          <br>
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">ping career.goals</span></div>
+          <div class="t-out">PONG: <span class="t-val">Network Engineer</span></div>
+          <div class="t-out">PONG: <span class="t-val">Cloud Engineer</span></div>
+          <div class="t-out">PONG: <span class="t-val">SysAdmin</span></div>
+          <br>
+          <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">uptime</span></div>
+          <div class="t-out">Always learning <span class="t-cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- RINGKASAN PROFESIONAL -->
+<section>
+  <div class="container">
+    <div class="section-label">// ringkasan profesional</div>
+    <h2 class="section-title">Profil Singkat</h2>
+
+    <div class="summary-box">
+      <p class="summary-text">
+        Aditya Faisal Akbar adalah seorang <strong>talenta muda IT yang highly-driven</strong> dengan basis teknis yang kuat di bidang jaringan komputer, administrasi sistem Linux, cloud computing, dan keamanan siber. Melalui program pendidikan vokasi di <em>SMK Wikrama Bogor</em>, ia telah membangun portofolio teknis yang komprehensif — mulai dari konfigurasi routing MikroTik dan Cisco, deployment infrastruktur di <em>AWS</em>, hingga implementasi firewall berbasis OPNsense dan monitoring sistem menggunakan Nagios dan Zabbix.
+        <br><br>
+        Yang membedakan Aditya adalah kemampuannya untuk <strong>mengintegrasikan berbagai teknologi</strong> dalam satu ekosistem — menghubungkan Linux server, MikroTik, layanan AWS, dan sistem monitoring dalam arsitektur yang kohesif. Pengalamannya mencakup baik <em>physical layer</em> (instalasi fiber optic, crimping, cabling) maupun <em>cloud layer</em> (VPC, ELB, Auto Scaling, RDS). Ia juga telah mengaplikasikan <strong>Ansible untuk otomatisasi infrastruktur</strong>, sebuah skill yang sangat dicari di lingkungan produksi modern.
+        <br><br>
+        Dengan mentalitas <strong>problem-solver</strong>, keingintahuan yang tinggi terhadap teknologi baru, dan rekam jejak proyek nyata yang dapat diverifikasi, Aditya siap untuk berkembang menjadi <em>profesional IT berdampak tinggi</em> di lingkungan enterprise maupun startup teknologi.
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STATISTIK -->
+<section>
+  <div class="container">
+    <div class="strengths-grid">
+      <div class="strength-item">
+        <div class="strength-num">20+</div>
+        <div class="strength-label">Proyek Teknis</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">10+</div>
+        <div class="strength-label">Teknologi AWS</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">3</div>
+        <div class="strength-label">Sertifikasi</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">5+</div>
+        <div class="strength-label">Domain Keahlian</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">2</div>
+        <div class="strength-label">Platform Monitoring</div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-num">∞</div>
+        <div class="strength-label">Semangat Belajar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- KEAHLIAN TEKNIS -->
+<section id="keahlian">
+  <div class="container">
+    <div class="section-label">// technical skills</div>
+    <h2 class="section-title">Keahlian Teknis</h2>
+
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🌐</div>
+        <div class="skill-card-title">Networking & Routing</div>
+        <div class="skill-tags">
+          <span class="tag">MikroTik</span>
+          <span class="tag">Cisco</span>
+          <span class="tag">VLAN Config</span>
+          <span class="tag">NAT Gateway</span>
+          <span class="tag">DHCP Server</span>
+          <span class="tag">DNS Server</span>
+          <span class="tag">VoIP</span>
+          <span class="tag">Wireless P2P</span>
+          <span class="tag">Hotspot Config</span>
+          <span class="tag">IP Addressing</span>
+          <span class="tag">Network Design</span>
+          <span class="tag">Packet Tracer</span>
+          <span class="tag">GNS3</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🐧</div>
+        <div class="skill-card-title">Linux System Administration</div>
+        <div class="skill-tags">
+          <span class="tag">Linux Server Admin</span>
+          <span class="tag">SFTP Server</span>
+          <span class="tag">SAMBA Server</span>
+          <span class="tag">Web Server</span>
+          <span class="tag">Mail Server</span>
+          <span class="tag">DNS Server</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">CyberPanel</span>
+          <span class="tag">WordPress</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-title">Cloud Computing — AWS</div>
+        <div class="skill-tags">
+          <span class="tag">AWS EC2</span>
+          <span class="tag">AWS VPC</span>
+          <span class="tag">Elastic Load Balancer</span>
+          <span class="tag">Auto Scaling</span>
+          <span class="tag">AWS RDS</span>
+          <span class="tag">CloudWatch</span>
+          <span class="tag">Cloud Infrastructure</span>
+          <span class="tag">AWS Academy</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🔒</div>
+        <div class="skill-card-title">Security & Firewall</div>
+        <div class="skill-tags">
+          <span class="tag">OPNsense Firewall</span>
+          <span class="tag">Cyber Security</span>
+          <span class="tag">Network Security</span>
+          <span class="tag">Firewall Policy</span>
+          <span class="tag">Access Control</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">📊</div>
+        <div class="skill-card-title">Monitoring & Automation</div>
+        <div class="skill-tags">
+          <span class="tag">Nagios</span>
+          <span class="tag">Zabbix</span>
+          <span class="tag">AWS CloudWatch</span>
+          <span class="tag">NMS</span>
+          <span class="tag">Ansible Automation</span>
+          <span class="tag">Infrastructure Monitoring</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-icon">🔧</div>
+        <div class="skill-card-title">Physical & Fiber</div>
+        <div class="skill-tags">
+          <span class="tag">Fiber Optic Installation</span>
+          <span class="tag">FTTH</span>
+          <span class="tag">Cabling</span>
+          <span class="tag">Crimping</span>
+          <span class="tag">Access Point Config</span>
+          <span class="tag">Wireless Network</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROYEK -->
+<section id="proyek">
+  <div class="container">
+    <div class="section-label">// project experience</div>
+    <h2 class="section-title">Pengalaman Proyek</h2>
+
+    <div class="projects-list">
+
+      <div class="project-item">
+        <span class="project-num">01</span>
+        <div>
+          <div class="project-name">Implementasi NAT Gateway pada Linux Server</div>
+          <div class="project-tech">Linux · iptables · Network Routing</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">02</span>
+        <div>
+          <div class="project-name">Konfigurasi DHCP dan DNS Server</div>
+          <div class="project-tech">Linux · BIND · ISC-DHCP</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">03</span>
+        <div>
+          <div class="project-name">Implementasi SFTP & SAMBA Server</div>
+          <div class="project-tech">Linux · OpenSSH · Samba · File Sharing</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">04</span>
+        <div>
+          <div class="project-name">Deploy & Administrasi Web Server</div>
+          <div class="project-tech">Apache · Nginx · CyberPanel · WordPress</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">05</span>
+        <div>
+          <div class="project-name">Konfigurasi Mail Server</div>
+          <div class="project-tech">Postfix · Dovecot · DNS Records</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">06</span>
+        <div>
+          <div class="project-name">Otomatisasi Infrastruktur dengan Ansible</div>
+          <div class="project-tech">Ansible · Playbooks · Infrastructure as Code</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">07</span>
+        <div>
+          <div class="project-name">Monitoring Infrastruktur — Nagios & Zabbix</div>
+          <div class="project-tech">Nagios · Zabbix · SNMP · Alerting</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">08</span>
+        <div>
+          <div class="project-name">Integrasi Linux & MikroTik</div>
+          <div class="project-tech">MikroTik RouterOS · Linux · BGP · OSPF</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">09</span>
+        <div>
+          <div class="project-name">Implementasi Firewall OPNsense</div>
+          <div class="project-tech">OPNsense · pfSense · Firewall Rules · IDS/IPS</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">10</span>
+        <div>
+          <div class="project-name">Deploy Infrastruktur Cloud AWS</div>
+          <div class="project-tech">AWS EC2 · VPC · Security Groups · IAM</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">11</span>
+        <div>
+          <div class="project-name">Implementasi AWS ELB & Auto Scaling</div>
+          <div class="project-tech">Elastic Load Balancer · Launch Templates · ASG</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">12</span>
+        <div>
+          <div class="project-name">Integrasi AWS RDS & CloudWatch Monitoring</div>
+          <div class="project-tech">RDS MySQL · CloudWatch · Alarms · Dashboards</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">13</span>
+        <div>
+          <div class="project-name">Routing Multi-Router & Simulasi VoIP</div>
+          <div class="project-tech">GNS3 · Packet Tracer · SIP · Asterisk</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">14</span>
+        <div>
+          <div class="project-name">Konfigurasi Wireless Point-to-Point & AP</div>
+          <div class="project-tech">Ubiquiti · MikroTik · 802.11 · Site Survey</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">15</span>
+        <div>
+          <div class="project-name">Instalasi Fiber Optic & FTTH</div>
+          <div class="project-tech">Splicing · ODF · OTDR · ONT/OLT · GPON</div>
+        </div>
+      </div>
+
+      <div class="project-item">
+        <span class="project-num">16</span>
+        <div>
+          <div class="project-name">Implementasi Keamanan Jaringan</div>
+          <div class="project-tech">Network Security · ACL · Vulnerability Assessment</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SERTIFIKASI -->
+<section id="sertifikasi">
+  <div class="container">
+    <div class="section-label">// certifications</div>
+    <h2 class="section-title">Sertifikasi</h2>
+
+    <div class="certs-row">
+      <div class="cert-badge">
+        <div class="cert-issuer">Industry Certification</div>
+        <div class="cert-name">Network Fundamental Certification</div>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-issuer">Cisco</div>
+        <div class="cert-name">Cisco Dasar Certification</div>
+      </div>
+      <div class="cert-badge">
+        <div class="cert-issuer">Cyber Security</div>
+        <div class="cert-name">Cyber Security Dasar Certification</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- KEUNGGULAN -->
+<section>
+  <div class="container">
+    <div class="section-label">// professional strengths</div>
+    <h2 class="section-title">Keunggulan Profesional</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🔗</div>
+        <div class="skill-card-title">Full-Stack Infrastructure Thinking</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:0.5rem;">Mampu bekerja dari physical layer (fiber, cabling) hingga cloud layer (AWS), memberikan pemahaman end-to-end yang langka di kalangan profesional muda IT.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">⚡</div>
+        <div class="skill-card-title">Hands-on Project Portfolio</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:0.5rem;">Lebih dari 20 proyek nyata yang dapat didemonstrasikan — bukan sekadar teori. Setiap skill didukung oleh implementasi langsung dalam lingkungan yang dikonfigurasi sendiri.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🤖</div>
+        <div class="skill-card-title">DevOps & Automation Mindset</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:0.5rem;">Pengalaman dengan Ansible menunjukkan pemahaman akan Infrastructure as Code (IaC) — fondasi penting untuk karier di DevOps, SRE, atau Cloud Engineering modern.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🛡️</div>
+        <div class="skill-card-title">Security-First Approach</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:0.5rem;">Pemahaman keamanan jaringan terintegrasi dari firewall OPNsense, implementasi cyber security, hingga konfigurasi aman pada server Linux — berpikir seperti defender sejak awal karier.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">📈</div>
+        <div class="skill-card-title">Observability & Monitoring</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:0.5rem;">Profisien dalam Nagios, Zabbix, dan AWS CloudWatch — tiga platform monitoring yang mencakup on-premise dan cloud, krusial untuk menjaga uptime infrastruktur produksi.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🌱</div>
+        <div class="skill-card-title">Continuous Learner</div>
+        <p style="font-size:0.82rem;color:var(--text2);line-height:1.7;margin-top:0.5rem;">Menguasai teknologi dari AWS Academy, platform simulasi GNS3, hingga OPNsense secara mandiri — menunjukkan kemampuan self-learning yang esensial di industri IT yang terus berkembang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- KARIER -->
+<section id="karier">
+  <div class="container">
+    <div class="section-label">// career trajectory</div>
+    <h2 class="section-title">Tujuan Karier</h2>
+
+    <div class="career-grid">
+      <div class="career-card">
+        <span class="career-card-icon">🌐</span>
+        <div class="career-card-role">Network Engineer</div>
+        <p class="career-card-desc">Merancang dan mengelola infrastruktur jaringan enterprise — dari routing, switching, hingga WAN optimization dan network security.</p>
+      </div>
+      <div class="career-card">
+        <span class="career-card-icon">🏗️</span>
+        <div class="career-card-role">IT Infrastructure Engineer</div>
+        <p class="career-card-desc">Membangun dan memelihara fondasi IT organisasi — server, storage, network, dan virtualisasi yang mendukung operasional bisnis.</p>
+      </div>
+      <div class="career-card">
+        <span class="career-card-icon">⚙️</span>
+        <div class="career-card-role">System Administrator</div>
+        <p class="career-card-desc">Mengelola, mengamankan, dan mengoptimalkan sistem Linux server dalam skala produksi dengan pendekatan automation-first.</p>
+      </div>
+      <div class="career-card">
+        <span class="career-card-icon">☁️</span>
+        <div class="career-card-role">Cloud Engineer</div>
+        <p class="career-card-desc">Merancang dan mendeploy arsitektur cloud yang scalable, highly available, dan cost-efficient di platform AWS dan multi-cloud.</p>
+      </div>
+    </div>
+
+    <br><br>
+
+    <div class="summary-box">
+      <div class="section-label" style="margin-bottom:1rem;">// hr assessment</div>
+      <p class="summary-text">
+        Dari perspektif HR dan rekrutmen IT, <strong>Aditya Faisal Akbar</strong> adalah profil yang sangat menjanjikan untuk posisi <em>junior-to-mid level</em> di bidang Network Engineering, System Administration, atau Cloud Infrastructure. Breadth of skills yang dimilikinya — mencakup physical, on-premise, dan cloud — sangat jarang ditemukan pada kandidat dengan latar belakang pendidikan SMK.
+        <br><br>
+        Kombinasi pengalaman <strong>Linux server administration + AWS + Ansible</strong> menunjukkan kesiapan untuk lingkungan kerja modern yang menganut prinsip DevOps. Sementara itu, pengalaman MikroTik dan Cisco menjadikannya kandidat yang relevan untuk perusahaan ISP, telekomunikasi, atau enterprise dengan kebutuhan jaringan kompleks. <em>Rekomendasikan untuk interview teknis</em> di posisi Junior Network Engineer, Junior SysAdmin, atau Cloud Support Engineer.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-name">Aditya Faisal Akbar</div>
+      <div class="footer-note">
+        SMK Wikrama Bogor · TJKT · Bogor, Indonesia<br>
+        Network Engineering · Linux · Cloud · Security
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--text3);">
+        Built with precision · 2025
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
